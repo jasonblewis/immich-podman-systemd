@@ -35,19 +35,16 @@ The containers will act as this user on the host:
 - When immich creates files in the mounted volumes, they will be owned by this user on the host.
 
 ```
-useradd -r -m -d /var/lib/immich immich
+sudo useradd -r -m -d /var/lib/immich immich
 ```
 The containers and named volumes will be stored in `/var/lib/immich`.
 
 Configure `subuid` and `subgid` for podman to be able to run as this user:
 ```
-cat >> /etc/subuid <<EOF
-immich:2000000:1000000
-EOF
+echo 'immich:2000000:1000000' | sudo tee -a /etc/subuid
 
-cat >> /etc/subgid <<EOF
-immich:2000000:1000000
-EOF
+echo 'immich:2000000:1000000' | sudo tee -a /etc/subgid
+
 ```
 
 Copy these files into the user's `containers/systemd` directory:
