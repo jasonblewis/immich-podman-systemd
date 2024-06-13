@@ -55,9 +55,9 @@ sudo -u immich cp -v *.image *.container *.pod immich.env ~immich/.config/contai
 
 Start the user session, make it persistent and start the pod:
 ```
-systemctl start user@$(id -u immich)
-loginctl enable-linger immich
-systemctl --user -M immich@.host start immich-pod.service
+sudo systemctl start user@$(id -u immich)
+sudo loginctl enable-linger immich
+sudo systemctl --user -M immich@.host start immich-pod.service
 ```
 
 Watch `journalctl` to see if the containers start successfully -
